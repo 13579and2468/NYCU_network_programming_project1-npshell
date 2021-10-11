@@ -135,7 +135,7 @@ int main() {
           return EXIT_FAILURE;
         }
         // fork child and execute 
-        pid_t pid = fork();
+        pid_t pid = fork_unitil_success();
 
         if(pid == 0)
         {
@@ -191,7 +191,7 @@ int main() {
           numberpipes.push_back(np);
         }
         // fork child and execute 
-        pid_t pid = fork();
+        pid_t pid = fork_unitil_success();
         if(pid == 0)
         {
           Process proc((char *)(*previt).c_str(),(char **)argv);
