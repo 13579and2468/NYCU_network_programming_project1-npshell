@@ -50,6 +50,12 @@ struct Numberpipe{
   }
 };
 
+int fork_unitil_success(){
+  int r;
+  while( (r=fork())==-1 )usleep(1000);
+  return r;
+}
+
 int main() {
   init();
   string input;
