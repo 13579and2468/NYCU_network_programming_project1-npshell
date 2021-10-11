@@ -23,27 +23,29 @@ Process::Process(char* executable,char** argv)
 
 int Process::run()
 {
+    if(this->err!=-1)
+    {
+        dup2(this->err,STDERR_FILENO);
+    }
     if(this->input!=-1)
     {
         dup2(this->input,STDIN_FILENO);
-        close(this->input);
     }
     if(this->output!=-1)
     {
         dup2(this->output,STDOUT_FILENO);
-        close(this->output);
     }
-    if(this->err!=-1)
-    {
-        dup2(this->err,STDERR_FILENO);
-        close(this->err);
-    }
+    // close(-1) do nothing
+    close(this->err);
+    close(this->input);
+    close(this->output);
 
+
+    // file redirection
     for (int i=0;argv[i]!=NULL;i++)
     {
         if(strcmp(argv[i],">")==0)
         {
-            std::cout<<"file\n";
             int fd;
             try{
                 fd = open( argv[i+1],O_CREAT|O_RDWR|O_TRUNC,S_IRWXU|S_IRWXG|S_IRWXO );
@@ -58,6 +60,7 @@ int Process::run()
             break;
         }
     }
+
     int r = 0;
     if((r = execvp(executable,argv))==-1)
     {
