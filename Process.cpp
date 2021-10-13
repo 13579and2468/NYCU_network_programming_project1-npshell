@@ -64,8 +64,10 @@ int Process::run()
     int r = 0;
     if((r = execvp(executable,argv))==-1)
     {
+        delete[] argv;
         std::cerr<<"Unknown command: ["<<executable<<"].\n";
         exit(0);
     }
+
     return r;
 }

@@ -148,8 +148,8 @@ int main() {
         }else if(pid > 0)
         {
           childs.push_back(pid);
-          delete argv;
         }
+        delete[] argv;
         it++;
         previt = it;
       }else  // the last command of a line
@@ -205,7 +205,6 @@ int main() {
         {
           close(prevpipe[0]);
           close(prevpipe[1]);
-          delete argv;
           childs.push_back(pid);
 
           //if number pipe, no wait for processes, this code add wait list used when pipe to no number pipe
@@ -227,6 +226,7 @@ int main() {
         {
           waitpid(p,NULL,0);
         }
+        delete[] argv;
 
         // next line
         break;
