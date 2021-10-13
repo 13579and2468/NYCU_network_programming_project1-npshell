@@ -52,7 +52,7 @@ struct Numberpipe{
 
 int fork_unitil_success(){
   int r;
-  while( (r=fork())==-1 )usleep(1000);
+  while( (r=fork())==-1 );
   return r;
 }
 
@@ -62,7 +62,7 @@ int main() {
   vector<Numberpipe> numberpipes;
   while(true)
   {
-    cout<<"% ";
+    cout<<"%";
     getline(cin,input);
     vector<string> tokens = split(input);
     if(tokens.size() == 0)continue;  // continue when empty line
