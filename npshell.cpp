@@ -62,8 +62,8 @@ int main() {
   vector<Numberpipe> numberpipes;
   while(true)
   {
-    cout<<"%";
-    getline(cin,input);
+    cout<<"% ";
+    if(!getline(cin,input))break;
     vector<string> tokens = split(input);
     if(tokens.size() == 0)continue;  // continue when empty line
     for (Numberpipe& p: numberpipes)p.afterline--;  // decrease all pipe line 
